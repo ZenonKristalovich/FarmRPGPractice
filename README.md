@@ -2,8 +2,8 @@ Goals to Complete
 
 1-Holding tools display area it will effect (Completed)
 2-Being able to effect the ground, start by being able to till (Completed)
-3-Being able to plant seeds in the ground
-4-Proper farm yard design
+3-Being able to plant seeds in the ground (Completed)
+4-Proper farm yard design (Completed)
 5-Build house interior
 6-Be Able to enter/exit house
 7-Multiplayer, be able to be in different scenes at same time
