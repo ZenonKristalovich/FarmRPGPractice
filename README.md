@@ -5,7 +5,7 @@ Goals to Complete
 3-Being able to plant seeds in the ground (Completed)
 4-Proper farm yard design (Completed)
 5-Build house interior (Completed)
-6-Be Able to enter/exit house
+6-Be Able to enter/exit house (Completed)
 7-Multiplayer, be able to be in different scenes at same time
 8-Build day-night cycle
 9-Build clock design in top right of screen
