@@ -7,7 +7,7 @@ Goals to Complete
 5-Build house interior (Completed)
 6-Be Able to enter/exit house (Completed)
 8-Build day-night cycle (Completed)
-9-Build clock design in top right of screen
+9-Build clock design in top right of screen(Completed)
 10-Be able to water plants
 11-Plants grow as days go by
 12-Be able to harvest plants
