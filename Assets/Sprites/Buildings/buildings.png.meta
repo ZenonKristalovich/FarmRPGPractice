@@ -8857,10 +8857,10 @@ TextureImporter:
       name: buildings_1
       rect:
         serializedVersion: 2
-        x: 63
+        x: 64
         y: 960
-        width: 64
-        height: 74
+        width: 63
+        height: 21
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -9752,6 +9752,27 @@ TextureImporter:
       bones: []
       spriteID: ceecb9368dc751a449f59954bf22e4a2
       internalID: -770025797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildings_460
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 981
+        width: 63
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 809e2e985f9969644bfaa9d4440fb92b
+      internalID: -1502107978
       vertices: []
       indices: 
       edges: []

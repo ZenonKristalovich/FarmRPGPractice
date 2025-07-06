@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46580a291f794b5488b8681ed81a741d, type: 3}
+  m_Script: {fileID: 11500000, guid: b40a0eddeed6f674f9c81702ee3584be, type: 3}
   m_Name: Hoe
   m_EditorClassIdentifier: 
   itemName: Hoe
   index: 1
   max_stack: 1
   icon: {fileID: -1565039997, guid: 84ef53c03d83c6246a173784acc5f973, type: 3}
+  prefab: {fileID: 428518441123479617, guid: 2a945feb99f1d8f4bbee2b9dae11efe9, type: 3}

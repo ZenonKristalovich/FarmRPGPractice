@@ -16,3 +16,4 @@ MonoBehaviour:
   index: 0
   max_stack: 64
   icon: {fileID: 373297896, guid: bb9caf69318524e4bb1c0524cdd017d6, type: 3}
+  prefab: {fileID: 7259210283330663148, guid: ebca78b4af01c7d4fbf14ff1d3cb1491, type: 3}

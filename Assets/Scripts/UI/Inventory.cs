@@ -9,6 +9,7 @@ public class Inventory: MonoBehaviour
 {
     public List<Slot> slots = new List<Slot>();
     public GameObject inventoryPanel;
+    public ToolBar toolBar;
     [SerializeField] private Canvas canvas;
 
     private static Slot draggedSlot;
@@ -55,15 +56,18 @@ public class Inventory: MonoBehaviour
     public void refresh()
     {
         //Recheck every slot to make sure showing the correct details
-        foreach(Slot slot in slots )
+        for(int i = 0; i < slots.Count; i++)
         {
-            slot.refresh();
+            slots[i].refresh();
+            if(i < 9)
+            {
+                toolBar.updateSlot(i, slots[i]);
+            }
         }
     }
 
-    public bool Add(Item item)
+    public bool Add(Item item, int quantity)
     {
-
         int nullPos = -1;
 
         for(int i = 0; i < slots.Count;i++)
@@ -73,10 +77,11 @@ public class Inventory: MonoBehaviour
                 //Verify same type of item
                 if (slots[i].item.itemName == item.itemName)
                 {
-                    if(slots[i].item.max_stack >= (slots[i].quantity + 1))
+                    if(slots[i].item.max_stack >= (slots[i].quantity + quantity))
                     {
                         slots[i].item = item;
-                        slots[i].quantity++;
+                        slots[i].quantity += quantity;
+                        refresh();
                         return true;
                     }
                 }
@@ -90,12 +95,22 @@ public class Inventory: MonoBehaviour
         if (nullPos != -1)
         {
             slots[nullPos].item = item;
-            slots[nullPos].quantity++;
+            slots[nullPos].quantity += quantity;
+            refresh();
             return true;
         }
 
-
         return false;
+    }
+
+    public void Remove(int slot_num, int quantity)
+    {
+        slots[slot_num].quantity -= quantity;
+        if(slots[slot_num].quantity <= 0)
+        {
+            slots[slot_num].update_slot(null,0);
+        }
+        refresh();
     }
 
     //Drag/Drop procedure
@@ -143,6 +158,12 @@ public class Inventory: MonoBehaviour
         Slot fromSlot = draggedSlot;
         Slot toSlot = slots[slot_num];
 
+        // If dropping to the same slot, do nothing
+        if (fromSlot == toSlot)
+        {
+            return;
+        }
+
         if(toSlot.item != null)
         {
             if(toSlot.item.itemName == fromSlot.item.itemName)
@@ -175,8 +196,35 @@ public class Inventory: MonoBehaviour
             toSlot.update_slot(fromSlot.item,fromSlot.quantity);
             fromSlot.update_slot( null, 0);
         }
+        refresh();
     }
 
+    public void dropFromInventory()
+    {
+        if(draggedIcon != null)
+        {
+            //Get Item to Drop
+            Item toDrop = draggedSlot.item;
+
+            //Spawn Item 
+            Transform playerTransform = transform.root; // Get the root transform (player)
+            
+            // Generate random angle between 0 and 360 degrees
+            float randomAngle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+            Vector2 randomDirection = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle));
+            
+            // Spawn item 1 unit away from player in random direction
+            Vector2 spawnPosition = (Vector2)playerTransform.position + randomDirection;
+            GameManager.instance.itemDB.SpawnItem(spawnPosition,toDrop.index,draggedSlot.quantity,randomDirection);
+              
+            //Destroy Icon
+            Destroy(draggedIcon.gameObject);
+            draggedIcon = null;
+            draggedSlot.update_slot(null,0);
+            draggedSlot = null;
+            refresh();
+        }
+    }
     
     //End of Drag/Drop procedure
 
@@ -189,60 +237,5 @@ public class Inventory: MonoBehaviour
             toMove.transform.position = canvas.transform.TransformPoint(position);
         }
     }
-
-    /*
-    public void Add(Item item)
-    {
-        foreach( Slot slot in slots)
-        {
-            if(slot.itemName == item.data.itemName && slot.CanAddItem(item.data.itemName))
-            {
-                slot.AddItem(item);
-                return;
-            }
-        }
-
-        foreach( Slot slot in slots)
-        {
-            if(slot.itemName == "")
-            {
-                slot.AddItem(item);
-                return;
-            }
-        }
-    }
-
-    public void Remove(int index)
-    {
-        slots[index].RemoveItem();
-    }
-
-    public void Remove(int index, int numToRemove )
-    {
-        if(slots[index].count >- numToRemove)
-        {
-            for(int i = 0; i < numToRemove; i++)
-            {
-                Remove(index);
-            }
-        }
-    }
-
-    public void MoveSlot(int fromIndex, int toIndex, Inventory toInventory, int numToMove = 1)
-    {
-        Slot fromSlot = slots[fromIndex];
-        Slot toSlot = toInventory.slots[toIndex];
-
-        if(toSlot.IsEmpty || toSlot.CanAddItem(fromSlot.itemName))
-        {
-            for( int i = 0; i < numToMove; i++)
-            {
-                toSlot.AddItem(fromSlot.itemName,fromSlot.icon,fromSlot.maxAllowed);
-                fromSlot.RemoveItem();
-            }
-        }
-
-    }
-    */
 
 }

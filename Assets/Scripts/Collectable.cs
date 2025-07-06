@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
     public Item itemData;
+    public int quantity = 1;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,13 +11,12 @@ public class Collectable : MonoBehaviour
 
         if(player)
         {
-            Debug.Log("Item pick up");
             if(itemData != null)
             {
-                if(player.inventory.Add(itemData))
+                if(player.inventory.Add(itemData, quantity))
                 {
-                    //Only destroy object if it was added to inventory
-                    Destroy(this.gameObject);
+                    // Simply destroy the object
+                    Destroy(gameObject);
                 }
             }
         }

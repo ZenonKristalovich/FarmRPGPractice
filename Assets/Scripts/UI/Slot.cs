@@ -31,7 +31,7 @@ using UnityEngine.UI;
             iconImage.enabled = item != null;
 
 
-            if( quantity <= 0)
+            if( quantity <= 1)
             {
                 quantityText.text = "";
             }
